@@ -111,7 +111,7 @@ void List::insert(size_t pos, const ValueType& val) {
 }
 
 // TODO: check if pos is valid
-List::Iterator List::insert(const List::Iterator& pos, const ValueType& val) {
+void List::insert(const List::Iterator& pos, const ValueType& val) {
     if (pos == begin()) {
         insert(0, val);
     }

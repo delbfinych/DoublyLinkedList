@@ -45,7 +45,7 @@ public:
     ValueType& back();
 
     void insert(size_t pos, const ValueType& val);
-    List::Iterator insert(const List::Iterator& pos, const ValueType& val);
+    void insert(const List::Iterator& pos, const ValueType& val);
     void pushBack(const ValueType& val);
     void pushFront(const ValueType& val);
 
@@ -115,8 +115,8 @@ public:
 
         ValueType& operator*() const;
     };
-    ReverseIterator rBegin() const { return ReverseIterator(_tail); };
-    ReverseIterator rEnd() const { return ReverseIterator(_head->prev); };
+    ReverseIterator rbegin() const { return ReverseIterator(_tail); };
+    ReverseIterator rend() const { return ReverseIterator(_head->prev); };
 
 
     class ConstantIterator: public Iterator {
@@ -127,6 +127,6 @@ public:
         // function 'operator*' hides a non-virtual function from class 'Iterator
         const ValueType& operator*() const { return _ptr->data; };
     };
-    ConstantIterator cBegin() const { return ConstantIterator(_head); };
-    ConstantIterator cEnd() const { return ConstantIterator(_tail->next); };
+    ConstantIterator cbegin() const { return ConstantIterator(_head); };
+    ConstantIterator cend() const { return ConstantIterator(_tail->next); };
 };

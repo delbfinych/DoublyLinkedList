@@ -30,7 +30,7 @@ List::List(List&& other) noexcept {
 
 List& List::operator=(const List& other) {
     if (this != &other) {
-        *this = std::move(List(other));
+        *this = List(other);
     }
     return *this;
 }

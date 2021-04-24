@@ -124,7 +124,7 @@ public:
         ConstantIterator(Node* ptr): Iterator(ptr) {};
         ConstantIterator(const ConstantIterator& it): Iterator(it) {};
 
-        // function 'operator*' hides a non-virtual function from class 'Iterator
+        
         const ValueType& operator*() const { return _ptr->data; };
     };
     ConstantIterator cbegin() const { return ConstantIterator(_head); };

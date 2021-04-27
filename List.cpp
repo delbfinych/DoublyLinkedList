@@ -417,18 +417,20 @@ ValueType& List::ReverseIterator::operator*() const {
 
 // TODO: throw range error
 List::ReverseIterator List::ReverseIterator::operator+(size_t n) {
+    auto tmp = *this;
     while (n > 0) {
-        ++(*this);
+        ++(tmp);
         --n;
     }
-    return _ptr;
+    return tmp._ptr;
 }
 
 // TODO: throw range error
 List::ReverseIterator List::ReverseIterator::operator-(size_t n) {
+    auto tmp = *this;
     while (n > 0) {
-        ++(*this);
+        ++(tmp);
         --n;
     }
-    return _ptr;
+    return tmp._ptr;
 }

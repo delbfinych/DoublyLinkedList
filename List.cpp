@@ -303,7 +303,6 @@ List::Node* List::findNode(size_t pos) const {
         throw std::range_error("findNode(): Invalid pos");
     }
     size_t i = 0;
-    // TODO: начать искать с хвоста если pos больше середины
     auto ptr = _head;
     while (i < pos) {
         if (ptr->next) {
@@ -329,7 +328,6 @@ List::Iterator List::Iterator::operator+(size_t n) {
     }
     return tmp._ptr;
 }
-// TODO: throw range error
 List::Iterator List::Iterator::operator-(size_t n) {
     auto tmp = *this;
     while (n > 0) {
@@ -338,15 +336,17 @@ List::Iterator List::Iterator::operator-(size_t n) {
     }
     return tmp._ptr;
 }
-// TODO: throw range error
 List::Iterator& List::Iterator::operator++() {
-    _ptr = _ptr->next;
+    if (_ptr->next) {
+        _ptr = _ptr->next;
+    }
     return *this;
 }
 
-// TODO: throw range error
 List::Iterator& List::Iterator::operator--() {
-    _ptr = _ptr->prev;
+    if (_ptr->prev) {
+        _ptr = _ptr->prev;
+    }
     return *this;
 }
 
@@ -382,12 +382,16 @@ List::ReverseIterator::ReverseIterator(List::Node* ptr): _ptr(ptr) {}
 List::ReverseIterator::ReverseIterator(const List::ReverseIterator& it): _ptr(it._ptr) {}
 
 List::ReverseIterator& List::ReverseIterator::operator++() {
-    _ptr = _ptr->prev;
+    if (_ptr->prev) {
+        _ptr = _ptr->prev;
+    }
     return *this;
 }
 
 List::ReverseIterator& List::ReverseIterator::operator--() {
-    _ptr = _ptr->next;
+    if (_ptr->next) {
+        _ptr = _ptr->next;
+    }
     return *this;
 }
 
@@ -415,7 +419,6 @@ ValueType& List::ReverseIterator::operator*() const {
     return _ptr->data;
 }
 
-// TODO: throw range error
 List::ReverseIterator List::ReverseIterator::operator+(size_t n) {
     auto tmp = *this;
     while (n > 0) {
@@ -425,7 +428,6 @@ List::ReverseIterator List::ReverseIterator::operator+(size_t n) {
     return tmp._ptr;
 }
 
-// TODO: throw range error
 List::ReverseIterator List::ReverseIterator::operator-(size_t n) {
     auto tmp = *this;
     while (n > 0) {

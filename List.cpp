@@ -210,17 +210,16 @@ void List::_mutableMap(ValueType (* callback)(const ValueType&)) {
 void List::_mutableFilter(bool (* callback)(const ValueType&)) {
     for (auto it = begin(); it != end();) {
         if (!callback(*it)) {
-            //remove(it);
-            --_size;
+            auto nextIt = it + 1;
+            remove(it);
+            it = nextIt;
         }
         else {
             ++it;
         }
     }
 
-    if (!callback(*begin())) {
-        remove(0);
-    }
+
 }
 
 
@@ -323,19 +322,21 @@ List::Iterator::Iterator(const List::Iterator& it): _ptr(it._ptr) {}
 
 // TODO: throw range error
 List::Iterator List::Iterator::operator+(size_t n) {
+    auto tmp = *this;
     while (n > 0) {
-        ++(*this);
+        ++(tmp);
         --n;
     }
-    return _ptr;
+    return tmp._ptr;
 }
 // TODO: throw range error
 List::Iterator List::Iterator::operator-(size_t n) {
+    auto tmp = *this;
     while (n > 0) {
-        --(*this);
+        --(tmp);
         --n;
     }
-    return _ptr;
+    return tmp._ptr;
 }
 // TODO: throw range error
 List::Iterator& List::Iterator::operator++() {

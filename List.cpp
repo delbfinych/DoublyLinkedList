@@ -337,16 +337,12 @@ List::Iterator List::Iterator::operator-(size_t n) {
     return tmp._ptr;
 }
 List::Iterator& List::Iterator::operator++() {
-    if (_ptr->next) {
-        _ptr = _ptr->next;
-    }
+    _ptr = _ptr->next;
     return *this;
 }
 
 List::Iterator& List::Iterator::operator--() {
-    if (_ptr->prev) {
-        _ptr = _ptr->prev;
-    }
+    _ptr = _ptr->prev;
     return *this;
 }
 
